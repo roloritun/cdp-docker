@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  patchright-cdp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        TARGETPLATFORM: ${TARGETPLATFORM:-linux/amd64}
+    container_name: patchright-cdp-novnc
+    ports:
+      - "5901:5901"   # VNC port
+      - "6080:6080"   # noVNC web interface
+      - "9222:9222"   # Chrome DevTools Protocol (CDP)
+      - "9223:9223"   # CDP Forwarder (alternative access)
+      - "8000:8000"   # Browser API (browser_api/main.py)
+      - "8080:8080"   # CDP API (server.py)
+    environment:
+      - DISPLAY=:99
+      - VNC_PORT=5901
+      - NOVNC_PORT=6080
+      - CDP_PORT=9222
+      - API_PORT=8000
+      - CDP_API_PORT=8080
+      - PATCHRIGHT_HEADLESS=true
+    volumes:
+      - ./workspace:/workspace
+      - chrome-profile:/tmp/chrome-profile
+    shm_size: '2gb'
+    security_opt:
+      - seccomp:unconfined
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  chrome-profile:
