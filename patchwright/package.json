@@ -1,0 +1,24 @@
+{
+  "name": "cdp-proxy-simple",
+  "version": "1.0.0",
+  "description": "Simple CDP Proxy Server for Daytona with comprehensive URL rewriting",
+  "main": "cdp_proxy_simple.js",
+  "scripts": {
+    "start": "node cdp_proxy_simple.js",
+    "dev": "node --inspect cdp_proxy_simple.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "keywords": [
+    "cdp",
+    "chrome",
+    "devtools",
+    "proxy",
+    "playwright",
+    "daytona"
+  ],
+  "author": "",
+  "license": "MIT"
+}

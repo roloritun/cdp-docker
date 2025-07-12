@@ -62,11 +62,18 @@ browser = Browser(
 
 ## API Endpoints
 
+### Main API Server (Port 8000)
 - `GET /` - Health check
 - `GET /browser/status` - Browser connection status
 - `POST /browser/new_page` - Create new page
 - `POST /browser/navigate` - Navigate to URL
 - `GET /cdp/info` - CDP connection information
+
+### Browser API Server (Port 8080)
+- Browser automation actions via Patchright
+- Page interaction endpoints
+- Content extraction and manipulation
+- Screenshot and PDF generation
 
 ## Daytona Usage
 
@@ -83,6 +90,7 @@ This container is configured for Daytona with:
 - `NOVNC_PORT`: noVNC web port (default: 6080)
 - `CDP_PORT`: Chrome CDP port (default: 9222)
 - `API_PORT`: API server port (default: 8000)
+- `CDP_API_PORT`: CDP API server port (default: 8080)
 
 ## Directory Structure
 

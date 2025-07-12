@@ -1,31 +1,36 @@
 version: '3.8'
 
 services:
-  patchright-cdp:
+  browser-automation:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         TARGETPLATFORM: ${TARGETPLATFORM:-linux/amd64}
-    container_name: patchright-cdp-novnc
+      pull: true
+    container_name: browser-automation-novnc
+    image: browser-automation:1.0.0
+    # image: browser-automation:latest  # Uncomment if you want to use the latest
     ports:
       - "5901:5901"   # VNC port
       - "6080:6080"   # noVNC web interface
-      - "9222:9222"   # Chrome DevTools Protocol (CDP)
-      - "9223:9223"   # CDP Forwarder (alternative access)
+      - "9223:9223"   # Chrome DevTools Protocol (CDP) - forwarded
+      - "9221:9221"   # Chrome DevTools Protocol (CDP) - direct standalone
       - "8000:8000"   # Browser API (browser_api/main.py)
       - "8080:8080"   # CDP API (server.py)
     environment:
       - DISPLAY=:99
       - VNC_PORT=5901
       - NOVNC_PORT=6080
-      - CDP_PORT=9222
+      - CDP_PORT=9223
+      - CDP_STANDALONE_PORT=9221
       - API_PORT=8000
       - CDP_API_PORT=8080
       - PATCHRIGHT_HEADLESS=true
     volumes:
       - ./workspace:/workspace
       - chrome-profile:/tmp/chrome-profile
+      - chrome-cdp-profile:/tmp/chrome-cdp-profile
     shm_size: '2gb'
     security_opt:
       - seccomp:unconfined
@@ -39,3 +44,4 @@ services:
 
 volumes:
   chrome-profile:
+  chrome-cdp-profile:

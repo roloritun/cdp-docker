@@ -1,4 +1,6 @@
 old-docker/
 combined-cdp/
 google-cdp/
-
+*.backup
+build-*
+.DS_Store

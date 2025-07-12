@@ -1,26 +1,36 @@
 # Core browser automation (Patchright only to avoid conflicts)
-patchright>=1.52.0
+patchright>=1.52.0,<2.0.0
 
 # Web framework for API
-fastapi>=0.104.0
-uvicorn>=0.24.0
-pydantic>=2.0.0
+fastapi>=0.110.0,<1.0.0
+uvicorn[standard]>=0.27.0,<1.0.0
+pydantic>=2.5.0,<3.0.0
+
+# Optional Flask support (for compatibility wrapper)
+flask>=3.0.0,<4.0.0
 
 # HTTP client libraries
-httpx>=0.25.0
-requests>=2.31.0
+httpx>=0.26.0,<1.0.0
+requests>=2.31.0,<3.0.0
 
-# Image processing (for screenshots)
-Pillow>=10.0.0
-pytesseract>=0.3.10
-
-# Browser automation integration
-# browser-use>=0.1.0  # Uncomment when available
+# Image processing (for screenshots and OCR)
+Pillow>=10.2.0,<11.0.0
+pytesseract>=0.3.10,<1.0.0
 
 # Utility libraries
-python-dotenv>=1.0.0
-typing-extensions>=4.8.0
+python-dotenv>=1.0.0,<2.0.0
+typing-extensions>=4.9.0,<5.0.0
 
 # Additional useful libraries
-websockets>=12.0
-aiofiles>=23.0.0
+websockets>=12.0,<13.0
+aiofiles>=23.2.0,<24.0.0
+
+# JSON handling and data processing
+orjson>=3.9.0,<4.0.0
+
+# Async utilities
+asyncio-throttle>=1.0.0,<2.0.0
+
+# Standard library modules (no installation needed)
+# asyncio, base64, contextlib, dataclasses, datetime, enum, functools
+# io, logging, os, random, traceback, typing, uuid
