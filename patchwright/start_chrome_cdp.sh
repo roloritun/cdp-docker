@@ -77,32 +77,52 @@ fi
 
 # Start Chrome with CDP in background
 "$CHROME_PATH" \
-  --disable-dbus \
+  --no-sandbox \
+  --test-type \
+  --disable-setuid-sandbox \
   --disable-dev-shm-usage \
+  --disable-gpu \
+  --use-gl=swiftshader \
+  --window-size=1920,1080 \
+  --disable-dbus \
   --disable-background-timer-throttling \
   --disable-backgrounding-occluded-windows \
   --disable-renderer-backgrounding \
-  --remote-debugging-port=${CDP_STANDALONE_PORT:-9221} \
-  --remote-debugging-address=0.0.0.0 \
-  --disable-gpu \
-  --window-size=1920,1080 \
-  --user-data-dir=/tmp/chrome-cdp-profile \
-  --use-gl=swiftshader \
-  --no-first-run \
-  --no-default-browser-check \
+  --disable-background-networking \
+  --disable-ipc-flooding-protection \
   --disable-infobars \
   --disable-notifications \
   --disable-translate \
-  --disable-features=VizDisplayCompositor,TranslateUI \
   --disable-extensions \
-  --disable-logging \
   --disable-default-apps \
-  --disable-hang-monitor \
+  --disable-plugins-discovery \
+  --disable-component-extensions-with-background-pages \
+  --no-first-run \
+  --no-default-browser-check \
+  --disable-popup-blocking \
   --disable-prompt-on-repost \
+  --disable-hang-monitor \
   --disable-sync \
-  --disable-background-networking \
+  --disable-background-mode \
+  --disable-client-side-phishing-detection \
+  --disable-component-update \
+  --safebrowsing-disable-auto-update \
   --metrics-recording-only \
-  --disable-component-extensions-with-background-pages &
+  --disable-logging \
+  --disable-save-password-bubble \
+  --disable-session-crashed-bubble \
+  --disable-restore-session-state \
+  --password-store=basic \
+  --use-mock-keychain \
+  --disable-features=TranslateUI,VizDisplayCompositor,AutomationControlled,PasswordManager,FormControls \
+  --disable-breakpad \
+  --disable-web-resources \
+  --remote-debugging-port=${CDP_STANDALONE_PORT:-9221} \
+  --remote-debugging-address=0.0.0.0 \
+  --user-data-dir=/tmp/chrome-cdp-profile \
+  --enable-automation &
+
+
 # Store Chrome PID
 CHROME_PID=$!
 echo "Chrome started with PID: $CHROME_PID"
@@ -146,32 +166,50 @@ while true; do
         
         # Restart Chrome
         "$CHROME_PATH" \
-          --disable-dbus \
-          --disable-dev-shm-usage \
-          --disable-background-timer-throttling \
-          --disable-backgrounding-occluded-windows \
-          --disable-renderer-backgrounding \
-          --remote-debugging-port=${CDP_STANDALONE_PORT:-9221} \
-          --remote-debugging-address=0.0.0.0 \
-          --disable-gpu \
-          --window-size=1920,1080 \
-          --user-data-dir=/tmp/chrome-cdp-profile \
-          --use-gl=swiftshader \
-          --no-first-run \
-          --no-default-browser-check \
-          --disable-infobars \
-          --disable-notifications \
-          --disable-translate \
-          --disable-features=VizDisplayCompositor,TranslateUI \
-          --disable-extensions \
-          --disable-logging \
-          --disable-default-apps \
-          --disable-hang-monitor \
-          --disable-prompt-on-repost \
-          --disable-sync \
-          --disable-background-networking \
-          --metrics-recording-only \
-          --disable-component-extensions-with-background-pages &
+        --no-sandbox \
+        --test-type \
+        --disable-setuid-sandbox \
+        --disable-dev-shm-usage \
+        --disable-gpu \
+        --use-gl=swiftshader \
+        --window-size=1920,1080 \
+        --disable-dbus \
+        --disable-background-timer-throttling \
+        --disable-backgrounding-occluded-windows \
+        --disable-renderer-backgrounding \
+        --disable-background-networking \
+        --disable-ipc-flooding-protection \
+        --disable-infobars \
+        --disable-notifications \
+        --disable-translate \
+        --disable-extensions \
+        --disable-default-apps \
+        --disable-plugins-discovery \
+        --disable-component-extensions-with-background-pages \
+        --no-first-run \
+        --no-default-browser-check \
+        --disable-popup-blocking \
+        --disable-prompt-on-repost \
+        --disable-hang-monitor \
+        --disable-sync \
+        --disable-background-mode \
+        --disable-client-side-phishing-detection \
+        --disable-component-update \
+        --safebrowsing-disable-auto-update \
+        --metrics-recording-only \
+        --disable-logging \
+        --disable-save-password-bubble \
+        --disable-session-crashed-bubble \
+        --disable-restore-session-state \
+        --password-store=basic \
+        --use-mock-keychain \
+        --disable-features=TranslateUI,VizDisplayCompositor,AutomationControlled,PasswordManager,FormControls \
+        --disable-breakpad \
+        --disable-web-resources \
+        --remote-debugging-port=${CDP_STANDALONE_PORT:-9221} \
+        --remote-debugging-address=0.0.0.0 \
+        --user-data-dir=/tmp/chrome-cdp-profile \
+        --enable-automation &
         
         CHROME_PID=$!
         echo "Chrome restarted with PID: $CHROME_PID"
