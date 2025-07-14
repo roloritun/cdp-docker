@@ -1,9 +1,3 @@
-old-docker/
-combined-cdp/
-google-cdp/
-*.backup
-build-*
-.DS_Store
 # Chrome seccomp profile (not usable in Daytona)
 chrome.json
 
@@ -67,7 +61,7 @@ backup_*
 old_*
 *_old
 
-# Log files (runtime logs should be in /tmp/ inside container)
+# Log files
 *.log
 logs/
 
